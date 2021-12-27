@@ -1,14 +1,32 @@
 "use strict";
+// // class, object, instance variable
+// class Player {
+//   health: Number | undefined;
+//   speed: Number | undefined;
+//   constructor() {
+//     this.health;
+//     this.speed;
+//   }
+//   greet() {
+//     console.log(this.health, this.speed);
+//   }
+// }
+// const mario = new Player();
+// mario.health = 10;
+// mario.speed = 11;
+// Encapsulation, Private Variables, setter, getter
 class Player {
-    constructor() {
-        this.health;
-        this.speed;
+    setHealth(health) {
+        if (health < 0 || NaN) {
+            console.log("Negative value is not acceptable");
+            return;
+        }
+        this.health = health;
     }
-    greet() {
-        console.log(this.health, this.speed);
+    getHeath() {
+        return this.health;
     }
 }
 const mario = new Player();
-mario.health = 10;
-mario.speed = 11;
-console.log(mario);
+mario.setHealth(3);
+console.log(mario.getHeath());
