@@ -177,11 +177,66 @@
 /**
  * Multiple inheritance, interface
  */
+// abstract class Character {
+//   hunger!: number;
+//   health!: number;
+//   abstract eat(): void;
+// }
+// interface Hero extends Character {
+//   heroId: number;
+// }
+// interface Enemy extends Character {
+//   enemyId: number;
+// }
+// // Spy IS-A Hero Spy IS-A Enemy
+// class Spy implements Hero, Enemy {
+//   hunger!: number;
+//   health!: number;
+//   heroId!: number;
+//   enemyId!: number;
+//   eat(): void {
+//     this.hunger -= 1;
+//   }
+// }
+/**
+ * constructor, static, parameter, read-only properties
+ */
 class Character {
-}
-// Spy IS-A Hero Spy IS-A Enemy
-class Spy {
-    eat() {
-        this.hunger -= 1;
+    constructor(hunger, health) {
+        Character.count += 1;
+        this.hunger = hunger;
+        this.health = health;
+    }
+    setHanger(hunger) {
+        this.hunger = hunger;
+    }
+    setHealth(health) {
+        this.health = health;
+    }
+    getHunger() {
+        return this.hunger;
+    }
+    getHealth() {
+        return this.health;
     }
 }
+Character.count = 1;
+class Hero extends Character {
+    constructor(heroId, hunger, health) {
+        super(hunger, health);
+        this.heroId = heroId;
+    }
+    setHeroId(heroId) {
+        this.heroId = heroId;
+    }
+    getHeroId() {
+        return this.heroId;
+    }
+}
+const sajeeb = new Character(50, 60);
+const hero = new Hero(1, 50, 60);
+const hero1 = new Hero(1, 50, 60);
+const hero2 = new Hero(1, 50, 60);
+const hero3 = new Hero(1, 50, 60);
+console.log(sajeeb.getHunger(), sajeeb.getHealth());
+console.log(hero.getHeroId());

@@ -200,28 +200,78 @@
  * Multiple inheritance, interface
  */
 
-abstract class Character {
-  hunger!: number;
-  health!: number;
+// abstract class Character {
+//   hunger!: number;
+//   health!: number;
 
-  abstract eat(): void;
-}
+//   abstract eat(): void;
+// }
 
-interface Hero extends Character {
-  heroId: number;
-}
-interface Enemy extends Character {
-  enemyId: number;
-}
+// interface Hero extends Character {
+//   heroId: number;
+// }
+// interface Enemy extends Character {
+//   enemyId: number;
+// }
 
-// Spy IS-A Hero Spy IS-A Enemy
-class Spy implements Hero, Enemy {
-  hunger!: number;
-  health!: number;
-  heroId!: number;
-  enemyId!: number;
+// // Spy IS-A Hero Spy IS-A Enemy
+// class Spy implements Hero, Enemy {
+//   hunger!: number;
+//   health!: number;
+//   heroId!: number;
+//   enemyId!: number;
 
-  eat(): void {
-    this.hunger -= 1;
+//   eat(): void {
+//     this.hunger -= 1;
+//   }
+// }
+
+/**
+ * constructor, static, parameter, read-only properties
+ */
+
+class Character {
+  static count: number = 1;
+  private hunger: number;
+  private health: number;
+  constructor(hunger: number, health: number) {
+    Character.count += 1;
+    this.hunger = hunger;
+    this.health = health;
+  }
+  setHanger(hunger: number): void {
+    this.hunger = hunger;
+  }
+  setHealth(health: number): void {
+    this.health = health;
+  }
+  getHunger(): number {
+    return this.hunger;
+  }
+  getHealth(): number {
+    return this.health;
   }
 }
+class Hero extends Character {
+  private heroId: number;
+
+  constructor(heroId: number, hunger: number, health: number) {
+    super(hunger, health);
+    this.heroId = heroId;
+  }
+
+  setHeroId(heroId: number): void {
+    this.heroId = heroId;
+  }
+  getHeroId(): number {
+    return this.heroId;
+  }
+}
+
+const sajeeb = new Character(50, 60);
+const hero = new Hero(1, 50, 60);
+const hero1 = new Hero(1, 50, 60);
+const hero2 = new Hero(1, 50, 60);
+const hero3 = new Hero(1, 50, 60);
+console.log(sajeeb.getHunger(), sajeeb.getHealth());
+console.log(hero.getHeroId());
