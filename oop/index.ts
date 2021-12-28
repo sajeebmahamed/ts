@@ -42,52 +42,111 @@
 /**
  * inheritance
  */
-class Animal {
-  hunger: number | undefined;
-  health: number | undefined;
-  protected coordX: number | undefined;
-  protected coordY: number | undefined;
+// class Animal {
+//   hunger: number | undefined;
+//   health: number | undefined;
+//   protected coordX: number | undefined;
+//   protected coordY: number | undefined;
 
-  setCoordX(x: number) {
-    this.coordX = x;
-  }
-  setCoordY(y: number) {
-    this.coordY = y;
-  }
+//   setCoordX(x: number) {
+//     this.coordX = x;
+//   }
+//   setCoordY(y: number) {
+//     this.coordY = y;
+//   }
 
-  eat() {
-    console.log("eat");
-  }
-  sleep() {
-    console.log("sleep");
+//   eat() {
+//     console.log("eat");
+//   }
+//   sleep() {
+//     console.log("sleep");
+//   }
+//   move() {
+//     console.log("move");
+//   }
+//   makeNoise() {
+//     console.log("make noise");
+//   }
+// }
+
+// class Dog extends Animal {
+//   eat(): void {
+//     console.log("dog eat");
+//   }
+//   returnToOwner() {
+//     console.log(this.coordX, this.coordY);
+//   }
+//   move(): void {
+//     super.move();
+//   }
+// }
+// class Canine extends Dog {
+//   sleep(): void {
+//     console.log("Canine sleep");
+//   }
+// }
+// const dog = new Dog();
+// const canine = new Canine();
+// canine.sleep();
+// dog.setCoordX(10);
+// dog.setCoordY(11);
+// dog.returnToOwner();
+
+/**
+ * Polymorphism
+ */
+
+class Hero {
+  hunger!: number;
+  health!: number;
+
+  attack() {
+    console.log("I am attacking");
   }
   move() {
-    console.log("move");
+    console.log("I am moving");
   }
-  makeNoise() {
-    console.log("make noise");
+  eat() {
+    console.log("I am eating");
   }
 }
 
-class Dog extends Animal {
-  eat(): void {
-    console.log("dog eat");
-  }
-  returnToOwner() {
-    console.log(this.coordX, this.coordY);
-  }
-  move(): void {
-    // super.move();
-  }
-}
-class Canine extends Dog {
-  sleep(): void {
-    console.log("Canine sleep");
+// archer ISA hero
+class Archer extends Hero {
+  arrows: number = 1;
+
+  attack() {
+    super.attack();
+    console.log("Firing an arrow");
+    this.arrows -= 1;
   }
 }
-const dog = new Dog();
-const canine = new Canine();
-canine.sleep();
-dog.setCoordX(10);
-dog.setCoordY(11);
-dog.returnToOwner();
+class Mage extends Hero {
+  mage: number = 1;
+  attack(): void {
+    super.attack();
+    console.log("Mage");
+    this.mage -= 1;
+  }
+}
+class Tribe {
+  private heros: Hero[] = [];
+
+  setHeros(heros: Hero[]) {
+    this.heros = heros;
+  }
+  attack(): void {
+    for (let hero of this.heros) {
+      hero.attack();
+    }
+  }
+}
+
+const archer: Hero = new Archer();
+const mage: Hero = new Mage();
+
+const heros: Hero[] = [archer, mage];
+const tribe = new Tribe();
+tribe.setHeros(heros);
+
+tribe.attack();

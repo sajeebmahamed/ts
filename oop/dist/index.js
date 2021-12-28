@@ -39,45 +39,105 @@
 /**
  * inheritance
  */
-class Animal {
-    setCoordX(x) {
-        this.coordX = x;
-    }
-    setCoordY(y) {
-        this.coordY = y;
-    }
-    eat() {
-        console.log("eat");
-    }
-    sleep() {
-        console.log("sleep");
+// class Animal {
+//   hunger: number | undefined;
+//   health: number | undefined;
+//   protected coordX: number | undefined;
+//   protected coordY: number | undefined;
+//   setCoordX(x: number) {
+//     this.coordX = x;
+//   }
+//   setCoordY(y: number) {
+//     this.coordY = y;
+//   }
+//   eat() {
+//     console.log("eat");
+//   }
+//   sleep() {
+//     console.log("sleep");
+//   }
+//   move() {
+//     console.log("move");
+//   }
+//   makeNoise() {
+//     console.log("make noise");
+//   }
+// }
+// class Dog extends Animal {
+//   eat(): void {
+//     console.log("dog eat");
+//   }
+//   returnToOwner() {
+//     console.log(this.coordX, this.coordY);
+//   }
+//   move(): void {
+//     super.move();
+//   }
+// }
+// class Canine extends Dog {
+//   sleep(): void {
+//     console.log("Canine sleep");
+//   }
+// }
+// const dog = new Dog();
+// const canine = new Canine();
+// canine.sleep();
+// dog.setCoordX(10);
+// dog.setCoordY(11);
+// dog.returnToOwner();
+/**
+ * Polymorphism
+ */
+class Hero {
+    attack() {
+        console.log("I am attacking");
     }
     move() {
-        console.log("move");
+        console.log("I am moving");
     }
-    makeNoise() {
-        console.log("make noise");
-    }
-}
-class Dog extends Animal {
     eat() {
-        console.log("dog eat");
-    }
-    returnToOwner() {
-        console.log(this.coordX, this.coordY);
-    }
-    move() {
-        // super.move();
+        console.log("I am eating");
     }
 }
-class Canine extends Dog {
-    sleep() {
-        console.log("Canine sleep");
+// archer ISA hero
+class Archer extends Hero {
+    constructor() {
+        super(...arguments);
+        this.arrows = 1;
+    }
+    attack() {
+        super.attack();
+        console.log("Firing an arrow");
+        this.arrows -= 1;
     }
 }
-const dog = new Dog();
-const canine = new Canine();
-canine.sleep();
-dog.setCoordX(10);
-dog.setCoordY(11);
-dog.returnToOwner();
+class Mage extends Hero {
+    constructor() {
+        super(...arguments);
+        this.mage = 1;
+    }
+    attack() {
+        super.attack();
+        console.log("Mage");
+        this.mage -= 1;
+    }
+}
+class Tribe {
+    constructor() {
+        this.heros = [];
+    }
+    setHeros(heros) {
+        this.heros = heros;
+    }
+    attack() {
+        for (let hero of this.heros) {
+            hero.attack();
+        }
+    }
+}
+const archer = new Archer();
+const mage = new Mage();
+const heros = [archer, mage];
+const tribe = new Tribe();
+tribe.setHeros(heros);
+tribe.attack();
