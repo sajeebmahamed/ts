@@ -96,13 +96,70 @@
  * Polymorphism
  */
 
-class Hero {
+// class Hero {
+//   hunger!: number;
+//   health!: number;
+
+//   attack() {
+//     console.log("I am attacking");
+//   }
+//   move() {
+//     console.log("I am moving");
+//   }
+//   eat() {
+//     console.log("I am eating");
+//   }
+// }
+
+// // archer ISA hero
+// class Archer extends Hero {
+//   arrows: number = 1;
+
+//   attack() {
+//     super.attack();
+//     console.log("Firing an arrow");
+//     this.arrows -= 1;
+//   }
+// }
+// class Mage extends Hero {
+//   mage: number = 1;
+//   attack(): void {
+//     super.attack();
+//     console.log("Mage");
+//     this.mage -= 1;
+//   }
+// }
+// class Tribe {
+//   private heros: Hero[] = [];
+
+//   setHeros(heros: Hero[]) {
+//     this.heros = heros;
+//   }
+//   attack(): void {
+//     for (let hero of this.heros) {
+//       hero.attack();
+//     }
+//   }
+// }
+
+// const archer: Hero = new Archer();
+// const mage: Hero = new Mage();
+
+// const heros: Hero[] = [archer, mage];
+// const tribe = new Tribe();
+// tribe.setHeros(heros);
+
+// tribe.attack();
+
+/**
+ * Abstract Class
+ */
+
+abstract class Hero {
   hunger!: number;
   health!: number;
 
-  attack() {
-    console.log("I am attacking");
-  }
+  abstract attack(): void;
   move() {
     console.log("I am moving");
   }
@@ -116,7 +173,6 @@ class Archer extends Hero {
   arrows: number = 1;
 
   attack() {
-    super.attack();
     console.log("Firing an arrow");
     this.arrows -= 1;
   }
@@ -124,29 +180,18 @@ class Archer extends Hero {
 class Mage extends Hero {
   mage: number = 1;
   attack(): void {
-    super.attack();
     console.log("Mage");
     this.mage -= 1;
   }
 }
-class Tribe {
-  private heros: Hero[] = [];
-
-  setHeros(heros: Hero[]) {
-    this.heros = heros;
-  }
+abstract class Bob extends Hero {
+  //
+}
+class Anime extends Hero {
   attack(): void {
-    for (let hero of this.heros) {
-      hero.attack();
-    }
+    throw new Error("Method not implemented.");
   }
 }
 
-const archer: Hero = new Archer();
-const mage: Hero = new Mage();
-
-const heros: Hero[] = [archer, mage];
-const tribe = new Tribe();
-tribe.setHeros(heros);
-
-tribe.attack();
+const archer = new Archer();
+archer.attack();
