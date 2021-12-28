@@ -155,43 +155,73 @@
  * Abstract Class
  */
 
-abstract class Hero {
+// abstract class Hero {
+//   hunger!: number;
+//   health!: number;
+
+//   abstract attack(): void;
+//   move() {
+//     console.log("I am moving");
+//   }
+//   eat() {
+//     console.log("I am eating");
+//   }
+// }
+
+// // archer ISA hero
+// class Archer extends Hero {
+//   arrows: number = 1;
+
+//   attack() {
+//     console.log("Firing an arrow");
+//     this.arrows -= 1;
+//   }
+// }
+// class Mage extends Hero {
+//   mage: number = 1;
+//   attack(): void {
+//     console.log("Mage");
+//     this.mage -= 1;
+//   }
+// }
+// abstract class Bob extends Hero {
+//   //
+// }
+// class Anime extends Hero {
+//   attack(): void {
+//     throw new Error("Method not implemented.");
+//   }
+// }
+
+// const archer = new Archer();
+// archer.attack();
+
+/**
+ * Multiple inheritance, interface
+ */
+
+abstract class Character {
   hunger!: number;
   health!: number;
 
-  abstract attack(): void;
-  move() {
-    console.log("I am moving");
-  }
-  eat() {
-    console.log("I am eating");
-  }
+  abstract eat(): void;
 }
 
-// archer ISA hero
-class Archer extends Hero {
-  arrows: number = 1;
-
-  attack() {
-    console.log("Firing an arrow");
-    this.arrows -= 1;
-  }
+interface Hero extends Character {
+  heroId: number;
 }
-class Mage extends Hero {
-  mage: number = 1;
-  attack(): void {
-    console.log("Mage");
-    this.mage -= 1;
-  }
-}
-abstract class Bob extends Hero {
-  //
-}
-class Anime extends Hero {
-  attack(): void {
-    throw new Error("Method not implemented.");
-  }
+interface Enemy extends Character {
+  enemyId: number;
 }
 
-const archer = new Archer();
-archer.attack();
+// Spy IS-A Hero Spy IS-A Enemy
+class Spy implements Hero, Enemy {
+  hunger!: number;
+  health!: number;
+  heroId!: number;
+  enemyId!: number;
+
+  eat(): void {
+    this.hunger -= 1;
+  }
+}
